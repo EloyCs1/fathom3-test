@@ -8,6 +8,7 @@ export interface UserState {
 
 export interface Car {
   id: string;
+  favorite: boolean;
   make: string;
   model: string;
   drive: string;

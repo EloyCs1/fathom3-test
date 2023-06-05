@@ -1,6 +1,10 @@
+import { useEffect, useState } from "react";
+
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+
 import { BASE_SERVER_URL } from "constants/constants";
 import CardCar from "modules/cardGrid/components/cardCar/card-car";
-import { useEffect, useState } from "react";
 import { Car } from "types/types";
 
 export default function CardGrid() {
@@ -13,11 +17,26 @@ export default function CardGrid() {
         setGarage(data);
       });
   }, []);
+
   return (
     <>
-      {garage.map((car) => (
-        <CardCar key={car.id} {...car} />
-      ))}
+      <Container sx={{ py: 8 }} maxWidth="md">
+        <Grid container spacing={4}>
+          {garage
+            .sort((a, b) => {
+              if (a.favorite === b.favorite) {
+                return 0;
+              }
+              if (a.favorite) {
+                return -1;
+              }
+              return 1;
+            })
+            .map((car) => (
+              <CardCar key={car.id} {...car} />
+            ))}
+        </Grid>
+      </Container>
     </>
   );
 }

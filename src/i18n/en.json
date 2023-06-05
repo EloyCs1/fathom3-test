@@ -4,5 +4,8 @@
   "login.password": "Password",
   "login.remember": "Remember me",
   "login.forgot": "Forgot password?",
-  "login.signup": "Don't have an account? Sign Up"
+  "login.signup": "Don't have an account? Sign Up",
+  "toolbar.text": "Jaguar Garage",
+  "usermenu.settings": "Settings",
+  "usermenu.logout": "Logout"
 }

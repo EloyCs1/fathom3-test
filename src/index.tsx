@@ -1,6 +1,6 @@
 import "i18n";
 import "index.css";
-import AppRouter from "pages/app-router";
+import AppRouter from "pages/appRouter/app-router";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
