@@ -6,7 +6,7 @@ import CardCar from "modules/cardGrid/components/cardCar/card-car";
 import { useGetCarsQuery } from "services/garageApi";
 
 export default function CardGrid() {
-  const { data, refetch, isFetching } = useGetCarsQuery();
+  const { data, isFetching } = useGetCarsQuery();
   const garage = data ? [...data] : [];
 
   if (isFetching) {

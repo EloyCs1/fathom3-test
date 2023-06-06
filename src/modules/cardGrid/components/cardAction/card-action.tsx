@@ -9,12 +9,12 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-import { BASE_SERVER_URL, GARAGE_PATH, SIZE } from "constants/constants";
+import { SIZE } from "constants/constants";
+import { useDeleteCarMutation } from "services/garageApi";
 import CardConfirm from "../cardConfirm/card-confirm";
-import { useLazyDeleteCarQuery } from "services/garageApi";
 
 export default function CardAction({ id }: { id: number }) {
-  const [trigger] = useLazyDeleteCarQuery();
+  const [deleteCar] = useDeleteCarMutation();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -35,7 +35,7 @@ export default function CardAction({ id }: { id: number }) {
   };
 
   const handleOnConfirm = async () => {
-    await trigger(id);
+    await deleteCar(id);
     setOpenConfirm(false);
   };
 

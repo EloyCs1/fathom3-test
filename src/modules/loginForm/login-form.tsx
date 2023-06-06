@@ -16,7 +16,7 @@ export default function LoginForm() {
   // DEVELOP LOGIN CREDENTIALS
   const defaultValue = { email: "eloycs1992@gmail.com", password: "*********" };
 
-  const [trigger] = useLazyGetUserQuery();
+  const [getUser] = useLazyGetUserQuery();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function LoginForm() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    const { data: userData } = await trigger();
+    const { data: userData } = await getUser();
     if (
       userData &&
       data.get("email") === userData.email &&
