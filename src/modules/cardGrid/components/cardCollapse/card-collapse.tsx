@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import AirlineSeatReclineExtraIcon from "@mui/icons-material/AirlineSeatReclineExtra";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
@@ -10,13 +11,24 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { useGetTypesQuery } from "services/garageApi";
 import { Car } from "types/types";
 
 const CardCollapse: React.FC<{ expanded: boolean; car: Car }> = ({
   expanded,
   car,
 }) => {
-  const { drive, fueltype, trany, vclass } = car;
+  const { t, i18n } = useTranslation();
+  const { data } = useGetTypesQuery({
+    language: i18n.language,
+  });
+  const getLabel = (value: string, key: string) => {
+    if (data && data[key]) {
+      return data[key].find((t) => t.value === value)?.label ?? value;
+    }
+    return value;
+  };
+  const { drive, fuel, trany, gears } = car;
   const primaryTypographyProps = { fontSize: 14, fontWeight: "medium" };
   return (
     <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -27,7 +39,7 @@ const CardCollapse: React.FC<{ expanded: boolean; car: Car }> = ({
               <LocalGasStationIcon />
             </ListItemIcon>
             <ListItemText
-              primary={fueltype}
+              primary={getLabel(fuel, "fuel")}
               primaryTypographyProps={primaryTypographyProps}
             />
           </ListItem>
@@ -36,7 +48,7 @@ const CardCollapse: React.FC<{ expanded: boolean; car: Car }> = ({
               <TimeToLeaveIcon />
             </ListItemIcon>
             <ListItemText
-              primary={drive}
+              primary={getLabel(drive, "drive")}
               primaryTypographyProps={primaryTypographyProps}
             />
           </ListItem>
@@ -45,7 +57,7 @@ const CardCollapse: React.FC<{ expanded: boolean; car: Car }> = ({
               <SettingsSuggestIcon />
             </ListItemIcon>
             <ListItemText
-              primary={trany}
+              primary={getLabel(trany, "trany")}
               primaryTypographyProps={primaryTypographyProps}
             />
           </ListItem>
@@ -54,7 +66,7 @@ const CardCollapse: React.FC<{ expanded: boolean; car: Car }> = ({
               <AirlineSeatReclineExtraIcon />
             </ListItemIcon>
             <ListItemText
-              primary={vclass}
+              primary={`${gears} ${t("add.gears")}`}
               primaryTypographyProps={primaryTypographyProps}
             />
           </ListItem>

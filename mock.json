@@ -1,103 +1,191 @@
 {
+  "types_es": {
+    "drive": [
+      {
+        "value": "RWD",
+        "label": "Tracción trasera"
+      },
+      {
+        "value": "FWD",
+        "label": "Tracción delantera"
+      },
+      {
+        "value": "AWD",
+        "label": "Tracción total"
+      }
+    ],
+    "fuel": [
+      {
+        "value": "GAS",
+        "label": "Gasolina"
+      },
+      {
+        "value": "DIE",
+        "label": "Diesel"
+      },
+      {
+        "value": "HYB",
+        "label": "Híbrido"
+      },
+      {
+        "value": "ELE",
+        "label": "Eléctrico"
+      }
+    ],
+    "trany": [
+      {
+        "value": "AUT",
+        "label": "Automático"
+      },
+      {
+        "value": "MAN",
+        "label": "Manual"
+      }
+    ]
+  },
+  "types_en": {
+    "drive": [
+      {
+        "value": "RWD",
+        "label": "Rear-Wheel Drive"
+      },
+      {
+        "value": "FWD",
+        "label": "Front-Wheel Drive"
+      },
+      {
+        "value": "AWD",
+        "label": "All-Wheel Drive"
+      }
+    ],
+    "fuel": [
+      {
+        "value": "GAS",
+        "label": "Gasoline"
+      },
+      {
+        "value": "DIE",
+        "label": "Diesel"
+      },
+      {
+        "value": "HYB",
+        "label": "Hybrid"
+      },
+      {
+        "value": "ELE",
+        "label": "Electric"
+      }
+    ],
+    "trany": [
+      {
+        "value": "AUT",
+        "label": "Automatic"
+      },
+      {
+        "value": "MAN",
+        "label": "Manual"
+      }
+    ]
+  },
   "garage": [
     {
       "id": 0,
       "make": "Jaguar",
-      "favorite": false,
+      "favorite": true,
       "model": "XJRS Convertble",
-      "drive": "Rear-Wheel Drive",
-      "fueltype": "Premium Gasoline",
-      "year": "1993",
-      "trany": "Automatic 3-spd",
-      "vclass": "Two Seaters"
+      "drive": "RWD",
+      "fuel": "GAS",
+      "year": 1993,
+      "trany": "AUT",
+      "gears": 3
     },
     {
       "id": 1,
       "make": "Jaguar",
       "favorite": true,
       "model": "XJS V12 Convertible",
-      "drive": "Rear-Wheel Drive",
-      "fueltype": "Premium Gasoline",
-      "year": "1995",
-      "trany": "Automatic 4-spd",
-      "vclass": "Subcompact Cars"
+      "drive": "RWD",
+      "fuel": "GAS",
+      "year": 1995,
+      "trany": "AUT",
+      "gears": 4
     },
     {
       "id": 2,
       "make": "Jaguar",
-      "favorite": true,
+      "favorite": false,
       "model": "XJS",
-      "drive": "Rear-Wheel Drive",
-      "fueltype": "Regular Gasoline",
-      "year": "1987",
-      "trany": "Automatic 3-spd",
-      "vclass": "Subcompact Cars"
+      "drive": "RWD",
+      "fuel": "GAS",
+      "year": 1987,
+      "trany": "AUT",
+      "gears": 3
     },
     {
       "id": 3,
       "make": "Jaguar",
       "favorite": false,
       "model": "XJ-SC",
-      "drive": "Rear-Wheel Drive",
-      "fueltype": "Regular Gasoline",
-      "year": "1988",
-      "trany": "Automatic 3-spd",
-      "vclass": "Two Seaters"
+      "drive": "RWD",
+      "fuel": "GAS",
+      "year": 1988,
+      "trany": "AUT",
+      "gears": 3
     },
     {
       "id": 4,
       "make": "Jaguar",
-      "favorite": false,
+      "favorite": true,
       "model": "XJ12",
-      "drive": "Rear-Wheel Drive",
-      "fueltype": "Premium Gasoline",
-      "year": "1994",
-      "trany": "Automatic 4-spd",
-      "vclass": "Compact Cars"
+      "drive": "RWD",
+      "fuel": "GAS",
+      "year": 1994,
+      "trany": "AUT",
+      "gears": 4
     },
     {
       "id": 5,
       "make": "Jaguar",
-      "favorite": false,
+      "favorite": true,
       "model": "XJ-S",
-      "drive": "Rear-Wheel Drive",
-      "fueltype": "Regular Gasoline",
-      "year": "1988",
-      "trany": "Automatic 3-spd",
-      "vclass": "Subcompact Cars"
+      "drive": "RWD",
+      "fuel": "GAS",
+      "year": 1988,
+      "trany": "AUT",
+      "gears": 3
     },
     {
       "id": 6,
       "make": "Jaguar",
-      "favorite": true,
+      "favorite": false,
       "model": "XJS Coupe",
-      "drive": "Rear-Wheel Drive",
-      "fueltype": "Premium Gasoline",
-      "year": "1988",
-      "trany": "Automatic 3-spd",
-      "vclass": "Subcompact Cars"
+      "drive": "RWD",
+      "fuel": "GAS",
+      "year": 1988,
+      "trany": "AUT",
+      "gears": 3
     },
     {
       "id": 7,
       "make": "Jaguar",
-      "favorite": true,
+      "favorite": false,
       "model": "XJS V12 Coupe",
-      "drive": "Rear-Wheel Drive",
-      "fueltype": "Premium Gasoline",
-      "year": "1994",
-      "trany": "Automatic 4-spd",
-      "vclass": "Subcompact Cars"
+      "drive": "RWD",
+      "fuel": "GAS",
+      "year": 1994,
+      "trany": "AUT",
+      "gears": 4
     },
     {
       "id": 8,
       "make": "Jaguar",
       "favorite": false,
       "model": "XJRS Coupe",
-      "drive": "Rear-Wheel Drive",
-      "fueltype": "Premium Gasoline",
-      "year": "1993",
-      "trany": "Automatic 3-spd",
-      "vclass": "Subcompact Cars"
+      "drive": "RWD",
+      "fuel": "GAS",
+      "year": 1993,
+      "trany": "AUT",
+      "gears": 3
     }
   ],
   "user": {

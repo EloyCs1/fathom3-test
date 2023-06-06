@@ -12,10 +12,10 @@ import Grid from "@mui/material/Grid";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 
+import { useUpdateCarMutation } from "services/garageApi";
 import { Car } from "types/types";
 import CardAction from "../cardAction/card-action";
 import CardCollapse from "../cardCollapse/card-collapse";
-import { useUpdateCarMutation } from "services/garageApi";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -49,7 +49,7 @@ const CardCar: React.FC<{ car: Car }> = ({ car }) => {
     <Grid item xs={12} sm={6} md={4}>
       <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
         <CardHeader
-          avatar={<Avatar>J</Avatar>}
+          avatar={<Avatar>{make.charAt(0).toUpperCase()}</Avatar>}
           action={<CardAction id={id} />}
           title={`${make} ${model}`}
           subheader={`(${year})`}

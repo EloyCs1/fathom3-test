@@ -1,6 +1,6 @@
 import React from "react";
 
-import AddCar from "./components/addCar/add-car";
+import AddCar from "modules/addCar/add-car";
 import AppHeader from "./components/appHeader/app-header";
 
 export default function PrivateLayout({

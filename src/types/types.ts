@@ -12,8 +12,17 @@ export interface Car {
   make: string;
   model: string;
   drive: string;
-  fueltype: string;
-  year: string;
+  fuel: string;
+  year: number;
   trany: string;
-  vclass: string;
+  gears: number;
+}
+
+interface LiteralType {
+  value: string;
+  label: string;
+}
+
+export interface Types {
+  [key: string]: LiteralType[];
 }

@@ -3,9 +3,11 @@ import {
   BASE_SERVER_URL,
   GARAGE_PATH,
   GARAGE_TAG,
+  TYPES_EN_PATH,
+  TYPES_ES_PATH,
   USER_PATH,
 } from "constants/constants";
-import { Car, UserState } from "types/types";
+import { Car, Types, UserState } from "types/types";
 
 // Define a service using a base URL and expected endpoints
 export const garageApi = createApi({
@@ -13,12 +15,29 @@ export const garageApi = createApi({
   tagTypes: [GARAGE_TAG],
   baseQuery: fetchBaseQuery({ baseUrl: BASE_SERVER_URL }),
   endpoints: (builder) => ({
+    getUser: builder.query<UserState, void>({
+      query: () => `${USER_PATH}`,
+    }),
     getCars: builder.query<Car[], void>({
       query: () => `${GARAGE_PATH}`,
       providesTags: [GARAGE_TAG],
     }),
-    getUser: builder.query<UserState, void>({
-      query: () => `${USER_PATH}`,
+    getTypes: builder.query<Types, { language: string }>({
+      queryFn: async (arg, api, extraOptions, baseQuery) => {
+        const response = await baseQuery({
+          url: arg.language === "es" ? TYPES_ES_PATH : TYPES_EN_PATH,
+        });
+
+        return { data: response.data as Types };
+      },
+    }),
+    setCar: builder.mutation<void, Car>({
+      query: (car) => ({
+        method: "POST",
+        url: `${GARAGE_PATH}`,
+        body: car,
+      }),
+      invalidatesTags: [GARAGE_TAG],
     }),
     updateCar: builder.mutation<void, Car>({
       query: (car) => ({
@@ -37,7 +56,9 @@ export const garageApi = createApi({
 
 export const {
   useGetCarsQuery,
+  useGetTypesQuery,
   useLazyGetUserQuery,
+  useSetCarMutation,
   useDeleteCarMutation,
   useUpdateCarMutation,
 } = garageApi;
