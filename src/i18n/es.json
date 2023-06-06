@@ -7,5 +7,10 @@
   "login.signup": "¿No tienes una cuenta? Registrate",
   "toolbar.text": "Garaje Jaguar",
   "usermenu.settings": "Ajustes",
-  "usermenu.logout": "Desconectar"
+  "usermenu.logout": "Desconectar",
+  "card.edit": "Editar",
+  "card.delete": "Borrar",
+  "card.confirm.message": "¿Estás seguro que deseas borrar el registro?",
+  "card.confirm.accept": "Borrar",
+  "card.confirm.cancel": "Cancelar"
 }

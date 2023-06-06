@@ -14,6 +14,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 import { logout } from "features/user/userSlice";
+import { SIZE } from "constants/constants";
 
 export default function UserMenu() {
   const { t } = useTranslation();
@@ -36,19 +37,11 @@ export default function UserMenu() {
 
   return (
     <>
-      <IconButton
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleMenu}
-        color="inherit"
-      >
+      <IconButton onClick={handleMenu}>
         <Avatar sx={{ width: 32, height: 32 }}>{user.name.charAt(0)}</Avatar>
       </IconButton>
       <Menu
         anchorEl={anchorEl}
-        id="account-menu"
         open={Boolean(anchorEl)}
         onClose={handleClose}
         onClick={handleClose}
@@ -88,13 +81,13 @@ export default function UserMenu() {
         <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <Settings fontSize={SIZE} />
           </ListItemIcon>
           {t("usermenu.settings")}
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize={SIZE} />
           </ListItemIcon>
           {t("usermenu.logout")}
         </MenuItem>

@@ -7,5 +7,10 @@
   "login.signup": "Don't have an account? Sign Up",
   "toolbar.text": "Jaguar Garage",
   "usermenu.settings": "Settings",
-  "usermenu.logout": "Logout"
+  "usermenu.logout": "Logout",
+  "card.edit": "Edit",
+  "card.delete": "Delete",
+  "card.confirm.message": "Are you sure you want to delete record?",
+  "card.confirm.accept": "Delete",
+  "card.confirm.cancel": "Cancel"
 }

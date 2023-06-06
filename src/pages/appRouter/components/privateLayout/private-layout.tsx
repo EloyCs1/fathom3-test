@@ -1,5 +1,6 @@
 import React from "react";
 
+import AddCar from "./components/addCar/add-car";
 import AppHeader from "./components/appHeader/app-header";
 
 export default function PrivateLayout({
@@ -11,6 +12,7 @@ export default function PrivateLayout({
     <>
       <AppHeader />
       <main>{children}</main>
+      <AddCar />
     </>
   );
 }
