@@ -15,22 +15,13 @@ import { styled } from "@mui/material/styles";
 import { Car } from "types/types";
 import CardAction from "../cardAction/card-action";
 import CardCollapse from "../cardCollapse/card-collapse";
+import { useUpdateCarMutation } from "services/garageApi";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
 
-const CardCar: React.FC<Car> = ({
-  id,
-  make,
-  favorite,
-  model,
-  drive,
-  fueltype,
-  year,
-  trany,
-  vclass,
-}) => {
+const CardCar: React.FC<{ car: Car }> = ({ car }) => {
   const ExpandMore = styled((props: ExpandMoreProps) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -42,7 +33,13 @@ const CardCar: React.FC<Car> = ({
     }),
   }));
 
+  const { id, make, favorite, model, year } = car;
+  const [updateCar] = useUpdateCarMutation();
   const [expanded, setExpanded] = useState(false);
+
+  const handleOnClickFavorite = () => {
+    updateCar({ ...car, favorite: !favorite });
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -58,7 +55,7 @@ const CardCar: React.FC<Car> = ({
           subheader={`(${year})`}
         />
         <CardActions disableSpacing>
-          <IconButton>
+          <IconButton onClick={handleOnClickFavorite}>
             {favorite ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
           </IconButton>
           <IconButton>
@@ -68,13 +65,7 @@ const CardCar: React.FC<Car> = ({
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
-        <CardCollapse
-          expanded={expanded}
-          fueltype={fueltype}
-          drive={drive}
-          trany={trany}
-          vclass={vclass}
-        />
+        <CardCollapse expanded={expanded} car={car} />
       </Card>
     </Grid>
   );

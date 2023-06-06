@@ -10,22 +10,13 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { Car } from "types/types";
 
-interface CardCollapseProps {
-  expanded: boolean;
-  drive: string;
-  fueltype: string;
-  trany: string;
-  vclass: string;
-}
-
-const CardCollapse: React.FC<CardCollapseProps> = ({
+const CardCollapse: React.FC<{ expanded: boolean; car: Car }> = ({
   expanded,
-  drive,
-  fueltype,
-  trany,
-  vclass,
+  car,
 }) => {
+  const { drive, fueltype, trany, vclass } = car;
   const primaryTypographyProps = { fontSize: 14, fontWeight: "medium" };
   return (
     <Collapse in={expanded} timeout="auto" unmountOnExit>

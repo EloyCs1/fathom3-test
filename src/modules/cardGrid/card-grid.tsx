@@ -32,7 +32,7 @@ export default function CardGrid() {
               return 1;
             })
             .map((car) => (
-              <CardCar key={car.id} {...car} />
+              <CardCar key={car.id} car={car} />
             ))}
         </Grid>
       </Container>
