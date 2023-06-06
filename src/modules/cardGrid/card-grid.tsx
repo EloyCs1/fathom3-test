@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
-
+import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-
-import { BASE_SERVER_URL } from "constants/constants";
 import CardCar from "modules/cardGrid/components/cardCar/card-car";
-import { Car } from "types/types";
+
+import { useGetCarsQuery } from "services/garageApi";
 
 export default function CardGrid() {
-  const [garage, setGarage] = useState<Car[]>([]);
+  const { data, refetch, isFetching } = useGetCarsQuery();
+  const garage = data ? [...data] : [];
 
-  useEffect(() => {
-    fetch(BASE_SERVER_URL + "/garage")
-      .then((res) => res.json())
-      .then((data) => {
-        setGarage(data);
-      });
-  }, []);
+  if (isFetching) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", top: "200px" }}>
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <>

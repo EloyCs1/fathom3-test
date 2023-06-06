@@ -5,18 +5,18 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
-import { BASE_SERVER_URL } from "constants/constants";
 import { login } from "features/user/userSlice";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { UserState } from "types/types";
+import { useLazyGetUserQuery } from "services/garageApi";
 
 export default function LoginForm() {
   // DEVELOP LOGIN CREDENTIALS
   const defaultValue = { email: "eloycs1992@gmail.com", password: "*********" };
 
+  const [trigger] = useLazyGetUserQuery();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,9 +24,10 @@ export default function LoginForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const response = await fetch(BASE_SERVER_URL + "/user");
-    const userData: UserState = await response.json();
+
+    const { data: userData } = await trigger();
     if (
+      userData &&
       data.get("email") === userData.email &&
       data.get("password") === userData.password
     ) {

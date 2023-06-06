@@ -9,14 +9,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-import { SIZE } from "constants/constants";
+import { BASE_SERVER_URL, GARAGE_PATH, SIZE } from "constants/constants";
 import CardConfirm from "../cardConfirm/card-confirm";
+import { useLazyDeleteCarQuery } from "services/garageApi";
 
-export default function CardAction({ id }: { id: string }) {
+export default function CardAction({ id }: { id: number }) {
+  const [trigger] = useLazyDeleteCarQuery();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openConfirm, setOpenConfirm] = useState(false);
-
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -33,8 +34,8 @@ export default function CardAction({ id }: { id: string }) {
     setOpenConfirm(false);
   };
 
-  const handleOnConfirm = () => {
-    console.log("DELETE", id);
+  const handleOnConfirm = async () => {
+    await trigger(id);
     setOpenConfirm(false);
   };
 

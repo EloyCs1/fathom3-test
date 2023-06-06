@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 interface CardCollapseProps {
   expanded: boolean;
   drive: string;
-  fueltype1: string;
+  fueltype: string;
   trany: string;
   vclass: string;
 }
@@ -22,7 +22,7 @@ interface CardCollapseProps {
 const CardCollapse: React.FC<CardCollapseProps> = ({
   expanded,
   drive,
-  fueltype1,
+  fueltype,
   trany,
   vclass,
 }) => {
@@ -36,7 +36,7 @@ const CardCollapse: React.FC<CardCollapseProps> = ({
               <LocalGasStationIcon />
             </ListItemIcon>
             <ListItemText
-              primary={fueltype1}
+              primary={fueltype}
               primaryTypographyProps={primaryTypographyProps}
             />
           </ListItem>

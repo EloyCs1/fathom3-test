@@ -7,12 +7,12 @@ export interface UserState {
 }
 
 export interface Car {
-  id: string;
+  id: number;
   favorite: boolean;
   make: string;
   model: string;
   drive: string;
-  fueltype1: string;
+  fueltype: string;
   year: string;
   trany: string;
   vclass: string;

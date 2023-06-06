@@ -1,25 +1,15 @@
 import React, { useState } from "react";
 
-import AirlineSeatReclineExtraIcon from "@mui/icons-material/AirlineSeatReclineExtra";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
-import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import ShareIcon from "@mui/icons-material/Share";
-import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import Collapse from "@mui/material/Collapse";
 import Grid from "@mui/material/Grid";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import { styled } from "@mui/material/styles";
 
 import { Car } from "types/types";
@@ -36,7 +26,7 @@ const CardCar: React.FC<Car> = ({
   favorite,
   model,
   drive,
-  fueltype1,
+  fueltype,
   year,
   trany,
   vclass,
@@ -80,7 +70,7 @@ const CardCar: React.FC<Car> = ({
         </CardActions>
         <CardCollapse
           expanded={expanded}
-          fueltype1={fueltype1}
+          fueltype={fueltype}
           drive={drive}
           trany={trany}
           vclass={vclass}
