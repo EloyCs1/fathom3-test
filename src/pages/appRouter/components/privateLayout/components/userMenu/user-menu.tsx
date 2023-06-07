@@ -4,8 +4,18 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 
+import FlagIcon from "@mui/icons-material/Flag";
 import Logout from "@mui/icons-material/Logout";
-import Settings from "@mui/icons-material/Settings";
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  InputLabel,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -13,11 +23,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-import { logout } from "features/user/userSlice";
 import { SIZE } from "constants/constants";
+import { logout } from "features/user/userSlice";
 
 export default function UserMenu() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state);
 
@@ -33,6 +43,20 @@ export default function UserMenu() {
 
   const handleLogout = () => {
     dispatch(logout());
+  };
+
+  const [openLang, setOpenLang] = React.useState(false);
+
+  const openLangModal = () => {
+    setOpenLang(true);
+  };
+  const closeLangModal = () => {
+    setOpenLang(false);
+  };
+
+  const changeLanguage = (event: SelectChangeEvent) => {
+    i18n.changeLanguage(event.target.value as string);
+    closeLangModal();
   };
 
   return (
@@ -79,11 +103,11 @@ export default function UserMenu() {
         </MenuItem>
         <MenuItem>{user.email}</MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={openLangModal}>
           <ListItemIcon>
-            <Settings fontSize={SIZE} />
+            <FlagIcon fontSize={SIZE} />
           </ListItemIcon>
-          {t("usermenu.settings")}
+          {t("usermenu.language")}
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
@@ -92,6 +116,29 @@ export default function UserMenu() {
           {t("usermenu.logout")}
         </MenuItem>
       </Menu>
+      <Dialog disableEscapeKeyDown open={openLang} onClose={closeLangModal}>
+        <DialogTitle>{t("usermenu.language")}</DialogTitle>
+        <DialogContent>
+          <Box
+            component="form"
+            sx={{ display: "flex", flexWrap: "wrap" }}
+            marginTop={1}
+          >
+            <FormControl fullWidth>
+              <InputLabel id="language">{t("usermenu.language")}</InputLabel>
+              <Select
+                labelId="language"
+                value={i18n.language}
+                label={t("usermenu.language")}
+                onChange={changeLanguage}
+              >
+                <MenuItem value={"es"}>{t("usermenu.es")}</MenuItem>
+                <MenuItem value={"en"}>{t("usermenu.en")}</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

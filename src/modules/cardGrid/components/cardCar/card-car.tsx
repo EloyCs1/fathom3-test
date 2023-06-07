@@ -16,6 +16,7 @@ import { useUpdateCarMutation } from "services/garageApi";
 import { Car } from "types/types";
 import CardAction from "../cardAction/card-action";
 import CardCollapse from "../cardCollapse/card-collapse";
+import { Checkbox } from "@mui/material";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -33,7 +34,7 @@ const CardCar: React.FC<{ car: Car }> = ({ car }) => {
     }),
   }));
 
-  const { id, make, favorite, model, year } = car;
+  const { make, favorite, model, year } = car;
   const [updateCar] = useUpdateCarMutation();
   const [expanded, setExpanded] = useState(false);
 
@@ -50,14 +51,17 @@ const CardCar: React.FC<{ car: Car }> = ({ car }) => {
       <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
         <CardHeader
           avatar={<Avatar>{make.charAt(0).toUpperCase()}</Avatar>}
-          action={<CardAction id={id} />}
+          action={<CardAction car={car} />}
           title={`${make} ${model}`}
           subheader={`(${year})`}
         />
         <CardActions disableSpacing>
-          <IconButton onClick={handleOnClickFavorite}>
-            {favorite ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
-          </IconButton>
+          <Checkbox
+            onClick={handleOnClickFavorite}
+            checked={favorite}
+            icon={<FavoriteBorderIcon />}
+            checkedIcon={<FavoriteIcon color="error" />}
+          />
           <IconButton>
             <ShareIcon />
           </IconButton>

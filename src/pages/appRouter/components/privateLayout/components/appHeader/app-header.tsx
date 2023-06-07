@@ -10,7 +10,7 @@ import UserMenu from "../userMenu/user-menu";
 export default function AppHeader() {
   const { t } = useTranslation();
   return (
-    <AppBar position="relative">
+    <AppBar position="fixed">
       <Toolbar>
         <GarageIcon sx={{ mr: 2 }} />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

@@ -10,10 +10,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 import { SIZE } from "constants/constants";
-import { useDeleteCarMutation } from "services/garageApi";
+import CarFormDialog from "modules/carFormDialog/car-form-dialog";
+import { useDeleteCarMutation, useUpdateCarMutation } from "services/garageApi";
+import { Car } from "types/types";
 import CardConfirm from "../cardConfirm/card-confirm";
 
-export default function CardAction({ id }: { id: number }) {
+export default function CardAction({ car }: { car: Car }) {
   const [deleteCar] = useDeleteCarMutation();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -35,8 +37,27 @@ export default function CardAction({ id }: { id: number }) {
   };
 
   const handleOnConfirm = async () => {
-    await deleteCar(id);
+    await deleteCar(car.id);
     setOpenConfirm(false);
+  };
+
+  const [updateCar] = useUpdateCarMutation();
+  const [isVisibleCarFormDialog, setIsVisibleCarFormDialog] = useState(false);
+
+  const openCarFormDialog = () => {
+    setIsVisibleCarFormDialog(true);
+  };
+
+  const closeCarFormDialog = () => {
+    setIsVisibleCarFormDialog(false);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const value = Object.fromEntries(data.entries()) as unknown as Car;
+    updateCar({ ...value, id: car.id });
+    closeCarFormDialog();
   };
 
   return (
@@ -50,7 +71,7 @@ export default function CardAction({ id }: { id: number }) {
         onClose={handleCloseMenu}
         onClick={handleCloseMenu}
       >
-        <MenuItem onClick={handleCloseMenu}>
+        <MenuItem onClick={openCarFormDialog}>
           <ListItemIcon>
             <EditIcon fontSize={SIZE} />
           </ListItemIcon>
@@ -67,6 +88,12 @@ export default function CardAction({ id }: { id: number }) {
         open={openConfirm}
         onClose={handleCloseConfirm}
         onConfirm={handleOnConfirm}
+      />
+      <CarFormDialog
+        open={isVisibleCarFormDialog}
+        onClose={closeCarFormDialog}
+        onSubmit={handleSubmit}
+        defaultValue={car}
       />
     </>
   );
