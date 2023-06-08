@@ -37,7 +37,7 @@ export default function CardAction({ car }: { car: Car }) {
   };
 
   const handleOnConfirm = async () => {
-    await deleteCar(car.id);
+    car.id && (await deleteCar(car.id));
     setOpenConfirm(false);
   };
 
@@ -52,11 +52,8 @@ export default function CardAction({ car }: { car: Car }) {
     setIsVisibleCarFormDialog(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const value = Object.fromEntries(data.entries()) as unknown as Car;
-    updateCar({ ...value, id: car.id });
+  const handleSubmit = (data: Car) => {
+    updateCar({ ...data });
     closeCarFormDialog();
   };
 

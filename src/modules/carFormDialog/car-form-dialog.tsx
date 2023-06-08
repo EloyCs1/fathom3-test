@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm } from "react-hook-form";
+import * as Yup from "yup";
+
 import { Checkbox, Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,21 +12,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
 
 import { useGetTypesQuery } from "services/garageApi";
-import { Car } from "types/types";
-
-interface CarFormDialogProps {
-  open: boolean;
-  onClose: () => void;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  defaultValue?: Car;
-}
+import { Car, CarFormDialogProps } from "types/types";
+import InputForm from "./components/inputForm/input-form";
+import SelectForm from "./components/selectForm/select-form";
+import CheckboxForm from "./components/checkboxForm/checkbox-form";
 
 const CarFormDialog: React.FC<CarFormDialogProps> = ({
   open,
@@ -37,10 +30,10 @@ const CarFormDialog: React.FC<CarFormDialogProps> = ({
     language: i18n.language,
   });
 
-  const formDefaultValue = defaultValue
+  const defaultValues = defaultValue
     ? defaultValue
     : {
-        id: undefined,
+        id: null,
         favorite: false,
         make: "",
         model: "",
@@ -51,101 +44,109 @@ const CarFormDialog: React.FC<CarFormDialogProps> = ({
         gears: null,
       };
 
+  const validationSchema = Yup.object().shape({
+    favorite: Yup.bool(),
+    make: Yup.string().required(t("validation.required") as string),
+    model: Yup.string().required(t("validation.required") as string),
+    drive: Yup.string().required(t("validation.required") as string),
+    fuel: Yup.string().required(t("validation.required") as string),
+    year: Yup.number()
+      .min(1886, t("validation.min.year") as string)
+      .max(new Date().getFullYear(), t("validation.max.year") as string)
+      .required(t("validation.required") as string),
+    trany: Yup.string().required(t("validation.required") as string),
+    gears: Yup.number()
+      .min(1, t("validation.min.gears") as string)
+      .max(9, t("validation.max.gears") as string)
+      .required(t("validation.required") as string),
+  });
+
+  const {
+    reset,
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<Car>({
+    resolver: yupResolver(validationSchema),
+    defaultValues: defaultValues,
+  });
+
+  useEffect(() => {
+    open && reset();
+  }, [open, reset]);
+
   return (
     <Dialog open={open} onClose={onClose}>
-      <Box component="form" noValidate onSubmit={onSubmit} sx={{ flexGrow: 1 }}>
+      <Box
+        component="form"
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+        sx={{ flexGrow: 1 }}
+      >
         <DialogTitle>
-          {formDefaultValue.id ? t("add.title.edit") : t("add.title.new")}
-          <Checkbox
-            name="favorite"
-            defaultChecked={formDefaultValue.favorite}
-            icon={<FavoriteBorderIcon />}
-            checkedIcon={<FavoriteIcon color="error" />}
-          />
+          {defaultValues.id ? t("add.title.edit") : t("add.title.new")}
+          <CheckboxForm name="favorite" control={control} register={register} />
         </DialogTitle>
         <DialogContent>
           <Grid container spacing={2} marginTop={1}>
-            <Grid item xs={5}>
-              <TextField
-                name="make"
-                label={t("add.make")}
-                fullWidth
-                defaultValue={formDefaultValue.make}
-              />
-            </Grid>
-            <Grid item xs={5}>
-              <TextField
-                name="model"
-                label={t("add.model")}
-                fullWidth
-                defaultValue={formDefaultValue.model}
-              />
-            </Grid>
-            <Grid item xs={2}>
-              <TextField
-                name="year"
-                type="number"
-                label={t("add.year")}
-                fullWidth
-                defaultValue={formDefaultValue.year}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <FormControl fullWidth>
-                <InputLabel id="select-drive">{t("add.drive")}</InputLabel>
-                <Select
-                  labelId="select-drive"
-                  name="drive"
-                  label={t("add.drive")}
-                  defaultValue={formDefaultValue.drive}
-                >
-                  {data &&
-                    data["drive"].map((drive) => (
-                      <MenuItem value={drive.value}>{drive.label}</MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={6}>
-              <FormControl fullWidth>
-                <InputLabel id="select-fuel">{t("add.fuel")}</InputLabel>
-                <Select
-                  labelId="select-fuel"
-                  name="fuel"
-                  label={t("add.fuel")}
-                  defaultValue={formDefaultValue.fuel}
-                >
-                  {data &&
-                    data["fuel"].map((fuel) => (
-                      <MenuItem value={fuel.value}>{fuel.label}</MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                type="number"
-                name="gears"
-                label={t("add.gears")}
-                defaultValue={formDefaultValue.gears}
-              />
-            </Grid>
-            <Grid item xs={8}>
-              <FormControl fullWidth>
-                <InputLabel id="select-trany">{t("add.trany")}</InputLabel>
-                <Select
-                  labelId="select-trany"
-                  name="trany"
-                  label={t("add.trany")}
-                  defaultValue={formDefaultValue.trany}
-                >
-                  {data &&
-                    data["trany"].map((trany) => (
-                      <MenuItem value={trany.value}>{trany.label}</MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </Grid>
+            <InputForm
+              xs={3}
+              name="make"
+              label={t("add.make")}
+              errors={errors}
+              register={register}
+            />
+            <InputForm
+              xs={5}
+              name="model"
+              label={t("add.model")}
+              errors={errors}
+              register={register}
+            />
+            <InputForm
+              xs={4}
+              type="number"
+              name="year"
+              label={t("add.year")}
+              errors={errors}
+              register={register}
+            />
+            <SelectForm
+              xs={6}
+              name={"drive"}
+              label={t("add.drive")}
+              control={control}
+              data={data}
+              register={register}
+              errors={errors}
+            />
+            <SelectForm
+              xs={6}
+              name={"fuel"}
+              label={t("add.fuel")}
+              control={control}
+              data={data}
+              register={register}
+              errors={errors}
+            />
+            <InputForm
+              xs={4}
+              type="number"
+              name="gears"
+              label={t("add.gears")}
+              errors={errors}
+              register={register}
+            />
+            <SelectForm
+              xs={8}
+              name={"trany"}
+              label={t("add.trany")}
+              control={control}
+              data={data}
+              register={register}
+              errors={errors}
+            />
           </Grid>
         </DialogContent>
         <DialogActions>

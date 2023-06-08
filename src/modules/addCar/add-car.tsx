@@ -20,13 +20,8 @@ export default function AddCar() {
     setOpen(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // Random id for demo api
-    const id = Math.random() * 11;
-    const data = new FormData(event.currentTarget);
-    const value = Object.fromEntries(data.entries()) as unknown as Car;
-    setCar({ ...value, id: id });
+  const handleSubmit = (data: Car) => {
+    setCar({ ...data });
     handleOnClickClose();
   };
 
