@@ -11,6 +11,7 @@
   "validation.max.year": "El año no puede exeder al actual",
   "validation.min.gears": "Mínimo 1 marcha",
   "validation.max.gears": "Máximo 9 marchas",
+  "validation.number": "Campo numérico",
   "toolbar.text": "Garaje",
   "usermenu.language": "Idioma",
   "usermenu.es": "Español",

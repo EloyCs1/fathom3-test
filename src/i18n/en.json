@@ -11,6 +11,7 @@
   "validation.max.year": "The year cannot exceed the current",
   "validation.min.gears": "Minimum 1 gear",
   "validation.max.gears": "Maximum 9 gears",
+  "validation.number": "Numeric field",
   "toolbar.text": "Garage",
   "usermenu.language": "Language",
   "usermenu.es": "Spanish",

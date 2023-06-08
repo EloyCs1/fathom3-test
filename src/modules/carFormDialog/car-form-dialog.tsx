@@ -51,11 +51,13 @@ const CarFormDialog: React.FC<CarFormDialogProps> = ({
     drive: Yup.string().required(t("validation.required") as string),
     fuel: Yup.string().required(t("validation.required") as string),
     year: Yup.number()
+      .typeError(t("validation.number") as string)
       .min(1886, t("validation.min.year") as string)
       .max(new Date().getFullYear(), t("validation.max.year") as string)
       .required(t("validation.required") as string),
     trany: Yup.string().required(t("validation.required") as string),
     gears: Yup.number()
+      .typeError(t("validation.number") as string)
       .min(1, t("validation.min.gears") as string)
       .max(9, t("validation.max.gears") as string)
       .required(t("validation.required") as string),
