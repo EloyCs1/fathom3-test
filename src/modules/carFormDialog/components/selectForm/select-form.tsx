@@ -16,7 +16,6 @@ const SelectForm: React.FC<SelectFormProps> = ({
   label,
   control,
   data,
-  register,
   errors,
 }) => {
   return (
@@ -24,8 +23,8 @@ const SelectForm: React.FC<SelectFormProps> = ({
       <FormControl fullWidth error={errors[name] ? true : false}>
         <InputLabel>{label}</InputLabel>
         <Controller
+          name={name}
           control={control}
-          {...register(name)}
           render={({ field }) => (
             <Select {...field} label={label}>
               {data &&

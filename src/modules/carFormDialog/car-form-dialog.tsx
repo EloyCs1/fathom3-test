@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-import { Checkbox, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -15,9 +15,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import { useGetTypesQuery } from "services/garageApi";
 import { Car, CarFormDialogProps } from "types/types";
+import CheckboxForm from "./components/checkboxForm/checkbox-form";
 import InputForm from "./components/inputForm/input-form";
 import SelectForm from "./components/selectForm/select-form";
-import CheckboxForm from "./components/checkboxForm/checkbox-form";
 
 const CarFormDialog: React.FC<CarFormDialogProps> = ({
   open,
@@ -86,7 +86,7 @@ const CarFormDialog: React.FC<CarFormDialogProps> = ({
       >
         <DialogTitle>
           {defaultValues.id ? t("add.title.edit") : t("add.title.new")}
-          <CheckboxForm name="favorite" control={control} register={register} />
+          <CheckboxForm name="favorite" control={control} />
         </DialogTitle>
         <DialogContent>
           <Grid container spacing={2} marginTop={1}>
@@ -118,7 +118,6 @@ const CarFormDialog: React.FC<CarFormDialogProps> = ({
               label={t("add.drive")}
               control={control}
               data={data}
-              register={register}
               errors={errors}
             />
             <SelectForm
@@ -127,7 +126,6 @@ const CarFormDialog: React.FC<CarFormDialogProps> = ({
               label={t("add.fuel")}
               control={control}
               data={data}
-              register={register}
               errors={errors}
             />
             <InputForm
@@ -144,7 +142,6 @@ const CarFormDialog: React.FC<CarFormDialogProps> = ({
               label={t("add.trany")}
               control={control}
               data={data}
-              register={register}
               errors={errors}
             />
           </Grid>

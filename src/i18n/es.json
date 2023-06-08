@@ -10,7 +10,7 @@
   "validation.min.year": "El año debe ser superior a 1886",
   "validation.max.year": "El año no puede exeder al actual",
   "validation.min.gears": "Mínimo 1 marcha",
-  "validation.max.gear": "Máximo 9 marchas",
+  "validation.max.gears": "Máximo 9 marchas",
   "toolbar.text": "Garaje",
   "usermenu.language": "Idioma",
   "usermenu.es": "Español",

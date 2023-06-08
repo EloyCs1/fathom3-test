@@ -37,14 +37,12 @@ export interface SelectFormProps {
   label: React.ReactNode;
   control: Control<Car, any>;
   data: Types | undefined;
-  register: UseFormRegister<Car>;
   errors: FieldErrors<Car>;
 }
 
 export interface CheckboxFormProps {
   name: keyof Car;
   control: Control<Car, any>;
-  register: UseFormRegister<Car>;
 }
 
 export interface Car {

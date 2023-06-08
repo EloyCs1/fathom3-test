@@ -10,7 +10,7 @@
   "validation.min.year": "The year must be greater than 1886",
   "validation.max.year": "The year cannot exceed the current",
   "validation.min.gears": "Minimum 1 gear",
-  "validation.max.gear": "Maximum 9 gears",
+  "validation.max.gears": "Maximum 9 gears",
   "toolbar.text": "Garage",
   "usermenu.language": "Language",
   "usermenu.es": "Spanish",

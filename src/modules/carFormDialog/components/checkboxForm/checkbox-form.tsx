@@ -7,19 +7,15 @@ import { Checkbox } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { CheckboxFormProps } from "types/types";
 
-const CheckboxForm: React.FC<CheckboxFormProps> = ({
-  name,
-  control,
-  register,
-}) => {
+const CheckboxForm: React.FC<CheckboxFormProps> = ({ name, control }) => {
   return (
     <Controller
+      name={name}
       control={control}
-      {...register(name)}
       render={({ field }) => (
         <Checkbox
           {...field}
-          defaultChecked={field.value as boolean}
+          checked={field.value as boolean}
           icon={<FavoriteBorderIcon />}
           checkedIcon={<FavoriteIcon color="error" />}
         />
