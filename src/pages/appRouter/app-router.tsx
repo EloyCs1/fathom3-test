@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "pages/appRouter/components/privateRoute/private-route";
 import PrivateLayout from "pages/appRouter/components/privateLayout/private-layout";
 import PublicRoute from "pages/appRouter/components/publicRoute/public-route";
-import DetailPage from "pages/detailPage/detail-page";
 import HomePage from "pages/homePage/home-page";
 import LoginPage from "pages/loginPage/login-page";
 
@@ -28,7 +27,6 @@ export default function AppRouter() {
               <PrivateLayout>
                 <Routes>
                   <Route path="home" element={<HomePage />} />
-                  <Route path="detail" element={<DetailPage />} />
                 </Routes>
               </PrivateLayout>
             </PrivateRoute>
